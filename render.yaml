@@ -1,0 +1,69 @@
+# Render Blueprint для Zori (Next.js 15). Создай сервис: Render → New → Blueprint,
+# укажи этот репозиторий. Значения секретов (sync:false) задаются в дашборде Render.
+services:
+  - type: web
+    name: zori
+    runtime: node
+    plan: starter            # можно free для теста
+    region: frankfurt        # ближе к ЕС/Neon
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      # ── Обязательные для сборки и запуска ──
+      - key: DATABASE_URL          # строка Neon Postgres (та же, что в .env — схема уже применена)
+        sync: false
+      - key: AUTH_SECRET           # openssl rand -base64 33
+        sync: false
+      - key: APP_URL               # https://<твой-домен> (для ссылок, писем, редиректов)
+        sync: false
+      - key: AUTH_URL              # тот же канонический URL, напр. https://zorifinance.com
+        sync: false                # пиннит OAuth redirect_uri (иначе плавает за Host прокси)
+      # ── AI (нужно, чтобы работал чат/категоризация/PDF) ──
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      # ── Письма (подтверждение email, приглашения в команду, отчёты) ──
+      # sendEmail() приоритет: SendGrid → Resend → dev-режим. Достаточно одного ключа.
+      - key: SENDGRID_API_KEY      # основной канал (домен zori.finance верифицирован)
+        sync: false
+      - key: RESEND_API_KEY        # запасной канал
+        sync: false
+      - key: EMAIL_FROM            # noreply@zori.finance
+        sync: false
+      # ── Фоновый синк/алерты (защита cron-эндпоинтов) ──
+      - key: CRON_SECRET
+        sync: false
+      # ── Опционально: Stripe Connect (чтение данных клиента) ──
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_CLIENT_ID
+        sync: false
+      - key: STRIPE_CONNECT_REDIRECT_URI   # https://<домен>/api/stripe/callback
+        sync: false
+      - key: TOKEN_ENCRYPTION_KEY          # openssl rand -hex 32 (нужен только для Stripe Connect)
+        sync: false
+      # ── Опционально: наш биллинг (Stripe), банк (GoCardless), Google-вход ──
+      - key: STRIPE_PRICE_STARTER
+        sync: false
+      - key: STRIPE_PRICE_GROWTH
+        sync: false
+      - key: STRIPE_PRICE_PRO
+        sync: false
+      - key: STRIPE_PRICE_PLUS               # личный тариф Plus (11 €/мес)
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: GOCARDLESS_SECRET_ID
+        sync: false
+      - key: GOCARDLESS_SECRET_KEY
+        sync: false
+      - key: YAXI_KEY_ID           # YAXI open banking (console yaxi.tech): key id
+        sync: false
+      - key: YAXI_SECRET_KEY       # YAXI: secret (base64) — после ротации!
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false

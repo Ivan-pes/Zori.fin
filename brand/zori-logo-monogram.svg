@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="158" height="40" viewBox="0 0 158 40">
+  <rect width="40" height="40" rx="10" fill="#16181C"/>
+  <path d="M13.5 13 H27 L13.5 27 H27" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="52" y="29" font-family="Inter, -apple-system, Segoe UI, sans-serif" font-size="29" font-weight="600" letter-spacing="-1" fill="#16181C">Zori</text>
+</svg>

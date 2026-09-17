@@ -1,0 +1,43 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# env — никогда не коммитим секреты
+.env
+.env*.local
+
+# debug / logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# misc
+.DS_Store
+*.pem
+next-env.d.ts
+tsconfig.tsbuildinfo
+.claude/
+
+# Внутренние материалы (планы, спеки, бриф, прототипы, маркетинг) — не в публичный репозиторий
+AI_CFO_Project_Brief.md
+PLANS_AND_FEATURES.md
+ANALYSIS_TOOLS.md
+ARCHITECTURE.md
+BILLING.md
+DEPLOY.md
+NEW_FEATURES.md
+zori-design-spec.md
+zori-personal-spec.md
+zori-category-signals-spec.md
+zori-app-prototype.html
+zori-design.html
+zori-forecast-panel.html
+zori-personal-design.html
+zori-new-features.html
+zori-ig-*.png
